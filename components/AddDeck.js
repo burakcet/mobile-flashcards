@@ -33,18 +33,24 @@ class AddDeck extends Component
 
   submit = () => {
     
-    // Save to "DB"
-    createDeckTitle( this.state.text );
+    if(this.state.text)
+    {
+      alert("You should enter deck name in order to create deck!")
+    }
+    else
+    {
+      // Save to "DB"
+      createDeckTitle( this.state.text );
 
-    // Update Redux
-    const deck = {title : this.state.text,questions:[]}
-    this.props.dispatch(addDeck(deck))
+      // Update Redux
+      const deck = {title : this.state.text,questions:[]}
+      this.props.dispatch(addDeck(deck))
 
-    this.setState(() => ({ text: '' }))
+      this.setState(() => ({ text: '' }))
 
-    // Navigate to deck
-    this.toDeck(deck);
-
+      // Navigate to deck
+      this.toDeck(deck);
+    }
 
     // Clear local notification
     //removeEntry(key)
