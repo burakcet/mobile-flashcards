@@ -1,6 +1,6 @@
 After cloning the code repository,
 
-to starting app:
+to start app:
 
 - npm install
 
