@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, TouchableOpacity, TextInput, Text, StyleSheet, Platform } from 'react-native'
-import { purple, white, black } from '../utils/colors'
+import { white, black } from '../utils/colors'
 import { NavigationActions } from 'react-navigation'
 import { addCardToDeck } from '../utils/api'
 import { connect } from 'react-redux'
@@ -41,23 +41,30 @@ class NewQuestCard extends Component {
     this.setState({ ready: true })
   }
 
-  submit = () => {
+  submit = () => 
+  {
     const question = this.state.question
     const answer = this.state.answer
-    const title = this.state.title
-    //Update DB
-    addCardToDeck
-      (
-        title,
-        question,
-        answer
-      )
-    // Update Redux
-    const { questions } = this.props.navigation.state.params;
-    const info = { title, questions, question, answer };
-    this.props.dispatch(addQuestion(info))
-    this.props.navigation.goBack();
-
+    if(question === '' || answer === '')
+    {
+      alert("Question and answer should not be empty!")
+    }
+    else
+    {
+      const title = this.state.title
+      //Update DB
+      addCardToDeck
+        (
+          title,
+          question,
+          answer
+        )
+      // Update Redux
+      const { questions } = this.props.navigation.state.params;
+      const info = { title, questions, question, answer };
+      this.props.dispatch(addQuestion(info))
+      this.props.navigation.goBack();
+    }
     // Clear local notification
     //removeEntry(key)
   }
