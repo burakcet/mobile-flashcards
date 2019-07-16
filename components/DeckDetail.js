@@ -34,7 +34,17 @@ class DeckDetail extends Component {
     }
   }
   render() {
-    let { title, questions } = this.props.navigation.state.params;
+    let { title} = this.props.navigation.state.params;
+    let questions = [];
+    if(this.props.decks[title])
+    {
+      questions = this.props.decks[title].questions;
+    }
+    else
+    {
+      questions = this.props.navigation.state.params;
+    }
+
     const { opacity, width, height } = this.state
     return (
       <View style={styles.container}>
